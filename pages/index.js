@@ -1,6 +1,6 @@
-import Login from "./login/Login";
-import Register from "./register/Register";
-import Dashboard from "./dashboard/Dashboard";
-import NotFound from "./notfound/NotFound";
+import Login from "./login";
+import Register from "./register";
+import Dashboard from "./dashboard";
+import NotFound from "./notfound";
 
 export { Login, Register, Dashboard, NotFound };
