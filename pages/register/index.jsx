@@ -54,39 +54,38 @@ export default function Register() {
     })
   }
   console.log(error);
-
   const errorMessage = {
     name: {
       message: "Name is required",
-      isValid: formData.name.length > 0,
+      isValid: formData?.name?.length > 0,
       onError: () => {
-        setError({ ...error, name: true })
+        setError((error) => ({ ...error, name: true }))
       }
     },
     email: {
       message: "Email is required",
       isValid: formData.email.length > 0,
       onError: () => {
-        setError({ ...error, email: true })
+        setError((error) => ({ ...error, email: true }))
       }
     },
     password: {
       message: "Password is required",
       isValid: formData.password.length > 0,
       onError: () => {
-        setError({ ...error, password: true })
+        setError((error) => ({ ...error, password: true }))
       }
     },
     confirmPassword: {
       message: "Passwords do not match",
       isValid: formData.confirmPassword === formData.password,
       onError: () => {
-        setError({ ...error, confirmPassword: true })
+        setError((error) => ({ ...error, confirmPassword: true }))
       }
     }
   }
 
   return (
-    <><div>Register</div><Form formFields={formFields} onSubmit={onSubmit} errorMessage={errorMessage} /></>
+    <><div>Register</div><Form error={error} formFields={formFields} onSubmit={onSubmit} errorMessage={errorMessage} /></>
   )
 }
