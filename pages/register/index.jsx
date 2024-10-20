@@ -1,21 +1,21 @@
-import React from 'react'
-import Form from '../../components/form'
-import { useState } from 'react'
+import React from "react";
+import Form from "../../components/form";
+import { useState } from "react";
+import styles from "./index.module.css";
 
 export default function Register() {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-  })
+  });
   const [error, setError] = useState({
     name: false,
     email: false,
     password: false,
     confirmPassword: false,
-  })
+  });
 
   const formFields = [
     {
@@ -40,9 +40,10 @@ export default function Register() {
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm your password",
-      onchange: (e) => setFormData({ ...formData, confirmPassword: e.target.value }),
+      onchange: (e) =>
+        setFormData({ ...formData, confirmPassword: e.target.value }),
     },
-  ]
+  ];
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -51,41 +52,58 @@ export default function Register() {
       if (!errorMessage[key].isValid) {
         errorMessage[key].onError();
       }
-    })
-  }
+    });
+  };
   console.log(error);
   const errorMessage = {
     name: {
       message: "Name is required",
       isValid: formData?.name?.length > 0,
       onError: () => {
-        setError((error) => ({ ...error, name: true }))
-      }
+        setError((error) => ({ ...error, name: true }));
+      },
     },
     email: {
       message: "Email is required",
       isValid: formData.email.length > 0,
       onError: () => {
-        setError((error) => ({ ...error, email: true }))
-      }
+        setError((error) => ({ ...error, email: true }));
+      },
     },
     password: {
       message: "Password is required",
       isValid: formData.password.length > 0,
       onError: () => {
-        setError((error) => ({ ...error, password: true }))
-      }
+        setError((error) => ({ ...error, password: true }));
+      },
     },
     confirmPassword: {
       message: "Passwords do not match",
       isValid: formData.confirmPassword === formData.password,
       onError: () => {
-        setError((error) => ({ ...error, confirmPassword: true }))
-      }
-    }
-  }
+        setError((error) => ({ ...error, confirmPassword: true }));
+      },
+    },
+  };
 
   return (
-    <><div>Register</div><Form error={error} formFields={formFields} onSubmit={onSubmit} errorMessage={errorMessage} /></>
-  )
+    <>
+    <div className={styles.container}>
+      <div className={styles.leftContainer}>
+        <h1>logo</h1>
+        <h2>Welcome aboard my friend <br/>just a couple of clicks and we start</h2>
+      </div>
+      <div className={styles.rightContainer}>
+        <div>Register</div>
+          <Form
+            error={error}
+            formFields={formFields}
+            onSubmit={onSubmit}
+            errorMessage={errorMessage}
+          />
+        </div>
+      </div>
+        
+    </>
+  );
 }
