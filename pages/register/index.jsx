@@ -2,8 +2,11 @@ import React from "react";
 import Form from "../../components/form";
 import { useState } from "react";
 import styles from "./index.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const goToLogin = () => navigate("/");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,25 +24,25 @@ export default function Register() {
     {
       name: "name",
       type: "text",
-      placeholder: "Enter your name",
+      placeholder: "Name",
       onchange: (e) => setFormData({ ...formData, name: e.target.value }),
     },
     {
       name: "email",
       type: "email",
-      placeholder: "Enter your email",
+      placeholder: "Email",
       onchange: (e) => setFormData({ ...formData, email: e.target.value }),
     },
     {
       name: "password",
       type: "password",
-      placeholder: "Enter your password",
+      placeholder: "Password",
       onchange: (e) => setFormData({ ...formData, password: e.target.value }),
     },
     {
       name: "confirmPassword",
       type: "password",
-      placeholder: "Confirm your password",
+      placeholder: "Confirm Password",
       onchange: (e) =>
         setFormData({ ...formData, confirmPassword: e.target.value }),
     },
@@ -88,22 +91,33 @@ export default function Register() {
 
   return (
     <>
-    <div className={styles.container}>
-      <div className={styles.leftContainer}>
-        <h1>logo</h1>
-        <h2>Welcome aboard my friend <br/>just a couple of clicks and we start</h2>
-      </div>
-      <div className={styles.rightContainer}>
-        <div>Register</div>
+      <div className={styles.container}>
+        <div className={styles.leftContainer}>
+          <img src="../src/assets/Group.png" alt="logo" />
+          <p>
+            Welcome aboard my friend <br />
+            <span>just a couple of clicks and we start</span>
+          </p>
+        </div>
+        <div className={styles.rightContainer}>
+          <div className={styles.header}>Register</div>
           <Form
             error={error}
             formFields={formFields}
             onSubmit={onSubmit}
             errorMessage={errorMessage}
           />
+          <div className={styles.footer}>
+            <p>Have an account?</p>
+            <button 
+              type="button" 
+              onClick={goToLogin} 
+              className={styles.loginButton}
+            >Login</button>
+             
+          </div>
         </div>
       </div>
-        
     </>
   );
 }

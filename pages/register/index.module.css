@@ -13,10 +13,88 @@
     width: 60%;
     height: 100%;
     background-color: #17A2B8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.leftContainer p{
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 33px;
+}
+
+.leftContainer span{
+    font-weight: 400;
+    font-size: 19px;
 }
 
 .rightContainer {
     width: 40%;
     height: 100%;
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    font-weight: 600;
+    color: #343434;
+    font-size: 33px;
+    margin-bottom: 2rem;
+}
+
+Form {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+
+.inputField {
+    border: 1.38px solid #D0D0D0;
+    width: 90%;
+    height: 45px;
+    border-radius: 11px;
+    font-weight: 400;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.submitButton {
+    width: 100%;
+    height: 45px;
+    margin-top: 1rem;
+    background-color: #17A2B8;
+    border-radius: 55px;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 20px;
+    border: none;
+}
+
+.footer {
+    width: 45%;
+}
+.footer p {
+    font-weight: 400;
+    font-size: 20px;
+    color: #828282;
+}
+
+.loginButton {
+    border: 1.38px solid #17A2B8;
+    width: 100%;
+    border-radius: 55px;
+    font-weight: 400;
+    font-size: 20px;
+    color: #17A2B8;
+    background-color: #FFFFFF;
+    height: 45px;
 }
