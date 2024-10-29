@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState} from "react";
 import Form from "../../components/form";
-import { useState } from "react";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../apis/auth";
 
 export default function Register() {
   const navigate = useNavigate();
-  const goToLogin = () => navigate("/");
+  const goToLogin = () => navigate("/login");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,39 +25,29 @@ export default function Register() {
       name: "name",
       type: "text",
       placeholder: "Name",
-      onchange: (e) => setFormData({ ...formData, name: e.target.value }),
+      onChange: (e) => setFormData({ ...formData, name: e.target.value }),
     },
     {
       name: "email",
       type: "email",
       placeholder: "Email",
-      onchange: (e) => setFormData({ ...formData, email: e.target.value }),
+      onChange: (e) => setFormData({ ...formData, email: e.target.value }),
     },
     {
       name: "password",
       type: "password",
       placeholder: "Password",
-      onchange: (e) => setFormData({ ...formData, password: e.target.value }),
+      onChange: (e) => setFormData({ ...formData, password: e.target.value }),
     },
     {
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
-      onchange: (e) =>
+      onChange: (e) =>
         setFormData({ ...formData, confirmPassword: e.target.value }),
     },
   ];
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    console.log(errorMessage.name.isValid);
-    Object.keys(errorMessage).forEach((key) => {
-      if (!errorMessage[key].isValid) {
-        errorMessage[key].onError();
-      }
-    });
-  };
-  console.log(error);
+
   const errorMessage = {
     name: {
       message: "Name is required",
@@ -89,6 +79,29 @@ export default function Register() {
     },
   };
 
+  const onSubmit = async (e) => {
+    let isError = false;
+    e.preventDefault();
+    console.log(errorMessage.name.isValid);
+    Object.keys(errorMessage).forEach((key) => {
+      if (!errorMessage[key].isValid) {
+        isError = true;
+        errorMessage[key].onError();
+      }
+    });
+
+    if (!isError) {
+      const res = await register({...formData});
+      if (res.status === 200) {
+        alert("Registration successful");
+        navigate("/login"); 
+      }else{
+        alert("Something went wrong");
+      }
+    }
+  };
+  console.log(error);
+
   return (
     <>
       <div className={styles.container}>
@@ -101,19 +114,26 @@ export default function Register() {
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.header}>Register</div>
-          <Form
-            error={error}
-            formFields={formFields}
-            onSubmit={onSubmit}
-            errorMessage={errorMessage}
-          />
+         
+            <Form
+              error={error}
+              formFields={formFields}
+              onSubmit={onSubmit}
+              errorMessage={errorMessage}
+
+            />
+            
+          
+          
+
           <div className={styles.footer}>
             <p>Have an account?</p>
             <button 
               type="button" 
               onClick={goToLogin} 
               className={styles.loginButton}
-            >Login</button>
+              >Login
+            </button>
              
           </div>
         </div>

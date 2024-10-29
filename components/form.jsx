@@ -26,8 +26,8 @@ export default function Form({ formFields, onSubmit, errorMessage, error }) {
                     <div key={index}>
                         <FormField 
                             value={field.value} 
-                            onChange={field.onchange} 
-                            key={index} 
+                            onChange={field.onChange} 
+                            // key={index} 
                             name={field.name} 
                             type={field.type} 
                             placeholder={field.placeholder} 

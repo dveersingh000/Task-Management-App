@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
-  const goToLogin = () => navigate("/dashboard");
+  const goToLogin = () => navigate("/");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
