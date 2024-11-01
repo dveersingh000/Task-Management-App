@@ -3,6 +3,12 @@ import Form from "../../components/form";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../apis/auth"; 
+import { MdEmail, MdLock } from "react-icons/md";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,20 +24,30 @@ export default function Login() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   const formFields = [
     {
       name: "email",
       type: "email",
       placeholder: "Email",
+      icon: <MdEmail className={styles.icon} />,
       value: formData.email,
       onChange: (e) => handleInputChange("email", e.target.value),
     },
     {
       name: "password",
-      type: "password",
+      type: showPassword ? "text" : "password", 
       placeholder: "Password",
+      icon: <MdLock className={styles.icon} />,
       value: formData.password,
       onChange: (e) => handleInputChange("password", e.target.value),
+      toggleIcon: showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />,
+      onToggle: togglePasswordVisibility,
     },
   ];
 
@@ -46,7 +62,11 @@ export default function Login() {
   const validateField = (field, value) => {
     switch (field) {
       case "email":
-        return value ? "" : "Email is required";
+        return value
+          ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            ? ""
+            : "Invalid email format"
+          : "Email is required";
       case "password":
         return value ? "" : "Password is required";
       default:
@@ -70,25 +90,26 @@ export default function Login() {
     try {
       const res = await login(formData.email, formData.password);
       if (res.token) {
-        alert("Login successful");
-        navigate("/");
+        toast.success("Login successful");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
-        alert("Something went wrong during login");
+        toast.error("Something went wrong during login");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Login failed. Please check your credentials and try again.");
+      toast.error("Login failed. Please check your credentials and try again.");
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="../src/assets/Group.png" alt="logo" className={styles.foregroundImage}/>
-        <img src="../src/assets/Back.png" alt="background" className={styles.backgroundImage} />
-        <br />
-        <br />
-        <br />
+        <img src="../src/assets/Group.png" alt="logo" className={styles.LogoImage}/>
+        <img src="../src/assets/Back.png" alt="background" className={styles.circle} />
+        
+        
         <p>
           Welcome aboard my friend <br />
           <span>just a couple of clicks and we start</span>
@@ -96,12 +117,33 @@ export default function Login() {
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.header}>Login</div>
-        <Form
-          error={error}
-          formFields={formFields}
-          onSubmit={onSubmit}
-        />
+          <form onSubmit={onSubmit} className={styles.form}>
+            {formFields.map((field, index) => (
+              <div key={index} className={styles.inputContainer}>
+                  {field.icon}
+                {/* <div className={styles.iconContainer}>
+                </div> */}
+                <input
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={field.onChange}
+                  className={styles.inputField}
+                />
+                {field.name === "password" && (
+                  <span onClick={field.onToggle} className={styles.eyeIcon}>
+                    {field.toggleIcon}
+                  </span>
+                )}
+                {error[field.name] && (
+                  <span className={styles.error}>{error[field.name]}</span>
+                )}
+              </div>
+            ))}
+            <button type="submit" className={styles.submitButton}>Login</button>
+          </form>
         <div className={styles.footer}>
+          
           <p>Have no account yet?</p>
           <button
             type="button"
@@ -112,6 +154,15 @@ export default function Login() {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        pauseOnFocusLoss
+      />
     </div>
   );
 }

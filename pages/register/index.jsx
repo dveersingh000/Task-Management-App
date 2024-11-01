@@ -3,6 +3,11 @@ import Form from "../../components/form";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../apis/auth";
+import { MdOutlinePerson2, MdEmail, MdLock } from "react-icons/md";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,11 +27,18 @@ export default function Register() {
     confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+
   const formFields = [
     {
       name: "name",
       type: "text",
       placeholder: "Name",
+      icon: <MdOutlinePerson2 className={styles.icon}/>,
       value: formData.name,
       onChange: (e) => handleInputChange("name", e.target.value),
     },
@@ -34,22 +46,35 @@ export default function Register() {
       name: "email",
       type: "email",
       placeholder: "Email",
+      icon: <MdEmail className={styles.icon} />,
       value: formData.email,
       onChange: (e) => handleInputChange("email", e.target.value),
     },
     {
       name: "password",
-      type: "password",
+      type: showPassword ? "text" : "password",
       placeholder: "Password",
+      icon: <MdLock className={styles.icon} />,
       value: formData.password,
       onChange: (e) => handleInputChange("password", e.target.value),
+      toggleIcon: showPassword ? (
+        <AiOutlineEyeInvisible className={styles.eyeIcon} onClick={togglePasswordVisibility} />
+      ) : (
+        <AiOutlineEye className={styles.eyeIcon} onClick={togglePasswordVisibility} />
+      ),
     },
     {
       name: "confirmPassword",
-      type: "password",
+      type: showConfirmPassword ? "text" : "password",
       placeholder: "Confirm Password",
+      icon: <MdLock className={styles.icon} />,
       value: formData.confirmPassword,
       onChange: (e) => handleInputChange("confirmPassword", e.target.value),
+      toggleIcon: showConfirmPassword ? (
+        <AiOutlineEyeInvisible className={styles.eyeIcon} onClick={toggleConfirmPasswordVisibility} />
+      ) : (
+        <AiOutlineEye className={styles.eyeIcon} onClick={toggleConfirmPasswordVisibility} />
+      ),
     },
   ];
 
@@ -73,7 +98,8 @@ export default function Register() {
           : "Email is required";
         
       case "password":
-        return value ? "" : "Password is required";
+        if (!value) return "Password is required";
+        return value.length < 8 ? "Password must be at least 8 characters long" : "";
       case "confirmPassword":
         return value === formData.password ? "" : "Passwords do not match";
       default:
@@ -96,28 +122,31 @@ export default function Register() {
       return;
     }
 
+    // console.log("Sending registration data:", formData);
+
     try {
       const res = await register({ ...formData });
       if (res.status === 201) {
-        alert("Registration successful");
-        navigate("/login");
+        toast.success("Registration successful!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
-        alert("Something went wrong");
+        toast.error("Something went wrong.");
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Registration failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="../src/assets/Group.png" alt="logo" className={styles.foregroundImage}/>
-        <img src="../src/assets/Back.png" alt="background" className={styles.backgroundImage} />
-        <br/>
-        <br/>
-        <br/>
+        <img src="../src/assets/Group.png" alt="logo" className={styles.LogoImage}/>
+        <img src="../src/assets/Back.png" alt="background" className={styles.circle} />
+        
+        
         <p>
           Welcome aboard my friend <br />
           <span>just a couple of clicks and we start</span>
@@ -125,11 +154,30 @@ export default function Register() {
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.header}>Register</div>
-        <Form
-          error={error}
-          formFields={formFields}
-          onSubmit={onSubmit}
-        />
+        
+        <form onSubmit={onSubmit} className={styles.form}>
+          {formFields.map((field, index) => (
+            <div key={index} className={styles.inputContainer}>
+              {field.icon} 
+              <input
+                type={field.type}
+                placeholder={field.placeholder}
+                value={field.value}
+                onChange={field.onChange}
+                className={styles.inputField}
+              />
+              {field.toggleIcon && (
+                <div className={styles.toggleIconContainer}>
+                  {field.toggleIcon}
+                </div>
+              )}
+              {error[field.name] && (
+                <span className={styles.error}>{error[field.name]}</span>
+              )}
+            </div>
+          ))}
+          <button type="submit" className={styles.submitButton}>Register</button>
+        </form>
         <div className={styles.footer}>
           <p>Have an account?</p>
           <button
@@ -141,6 +189,19 @@ export default function Register() {
           </button>
         </div>
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition: Bounce
+/>
     </div>
   );
 }
