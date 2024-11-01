@@ -17,8 +17,6 @@ function FormField({ name, type, placeholder, value, onChange }) {
 }
 
 export default function Form({ formFields, onSubmit, errorMessage, error }) {
-
-
     return (
         <form onSubmit={onSubmit} className={styles.form}>
             {
@@ -27,16 +25,14 @@ export default function Form({ formFields, onSubmit, errorMessage, error }) {
                         <FormField 
                             value={field.value} 
                             onChange={field.onChange} 
-                            // key={index} 
                             name={field.name} 
                             type={field.type} 
                             placeholder={field.placeholder} 
                         />
-                        {error[field.name] && <p className={styles.errorText}>{errorMessage[field.name].message}</p>}
+                        {error[field.name] && <p className={styles.errorText}>{error[field.name]}</p>}
                     </div>
                 ))
             }
-
             <button className={styles.submitButton} type="submit">Register</button>
         </form>
     )

@@ -17,8 +17,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
     
 }
+
+.foregroundImage {
+    position: absolute; 
+    z-index: 1; 
+    width: auto; 
+    height: auto; 
+    opacity: 100%;
+    top: 150px;
+    
+  }
+  .backgroundImage {
+    /* z-index: 1;  */
+    width: 35%;
+    opacity: 60%;
+  }
 
 .leftContainer p{
     font-weight: 600;

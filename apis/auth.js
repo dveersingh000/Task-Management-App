@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export const register = async (name, email, password) => {
+export const register = async (data) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/register`, {
-            name,
-            email,
-            password,
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/register`, data, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         });
-        return response.data;
+        return response;
     } catch (error) {
         console.error("Registration error:", error);
         throw error;
