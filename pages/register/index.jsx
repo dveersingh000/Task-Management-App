@@ -7,6 +7,8 @@ import { MdOutlinePerson2, MdEmail, MdLock } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LogoImage from "../../src/assets/Group.png";
+import BackgroundImage from "../../src/assets/Back.png";
 
 
 export default function Register() {
@@ -143,8 +145,8 @@ export default function Register() {
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="../src/assets/Group.png" alt="logo" className={styles.LogoImage}/>
-        <img src="../src/assets/Back.png" alt="background" className={styles.circle} />
+        <img src={LogoImage} alt="logo" className={styles.LogoImage} />
+        <img src={BackgroundImage} alt="background" className={styles.circle} />
         
         
         <p>
