@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Form from "../../components/form";
+// import Form from "../../components/form/form";
 import styles from "./index.module.css";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../apis/auth"; 

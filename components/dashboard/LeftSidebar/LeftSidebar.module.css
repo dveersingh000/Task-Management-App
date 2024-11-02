@@ -1,0 +1,79 @@
+.sidebar {
+    width: 250px;
+    background-color: #FFFFFF;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    border-right: 1px solid #EDF5FE;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    line-height: 24px;
+    color: #000000;
+  }
+  
+  .icon {
+    margin-right: 8px;
+  }
+  
+  .menu {
+    flex-grow: 1;
+    margin-top: 20px;
+  }
+  
+  .tab {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #707070;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    margin-right: 50px;
+    margin-top: 30px;
+  }
+  
+  .tabIcon {
+    margin-right: 8px;
+  }
+  
+  .tab:hover {
+    color: #61dafb;
+  }
+
+  .tabActive {
+    color: #000000;
+  }
+  
+  .logout {
+    display: flex;
+    align-items: center;
+    color: #CF3636;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    margin-right: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .logoutIcon {
+    margin-right: 8px;
+  }
+  
+  .logout:hover {
+    color: #ff6b6b;
+  }
+  
