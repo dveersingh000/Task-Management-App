@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CiGrid32, CiSettings } from 'react-icons/ci';
 import { PiDatabaseThin } from 'react-icons/pi';
 import { RiBox3Line } from 'react-icons/ri';
@@ -6,15 +7,19 @@ import { MdOutlineLogout } from 'react-icons/md';
 import styles from './LeftSidebar.module.css';
 
 export default function LeftSidebar({ activeTab, setActiveTab }) {
-    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const openLogoutModal = () => setIsLogoutModalOpen(true);
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
   const handleLogout = () => {
     closeLogoutModal();
-    console.log("Logged out successfully"); 
+    console.log("Logged out successfully");
+    // Redirect to login page
+    navigate('/');
   };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.title}>
