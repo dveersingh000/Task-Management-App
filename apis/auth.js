@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log("BASE_URL:", BASE_URL); 
 
 export const register = async (data) => {
     try {
@@ -9,7 +10,7 @@ export const register = async (data) => {
                 'Content-Type': 'application/json' 
             }
         });
-        return response.data;
+        return response;
     } catch (error) {
         console.error("Registration error:", error);
         throw error;
@@ -23,7 +24,7 @@ export const login = async (email, password) => {
             password,
         }, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
         return response.data;
