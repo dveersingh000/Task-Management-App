@@ -13,7 +13,7 @@ import BackgroundImage from "../../src/assets/Back.png";
 
 export default function Register() {
   const navigate = useNavigate();
-  const goToLogin = () => navigate("/login");
+  const goToLogin = () => navigate("/");
   
   const [formData, setFormData] = useState({
     name: "",
@@ -131,7 +131,7 @@ export default function Register() {
       if (res.status === 201) {
         toast.success("Registration successful!");
         setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, 2000);
       } else {
         toast.error("Something went wrong.");

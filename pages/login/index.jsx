@@ -94,7 +94,7 @@ export default function Login() {
       if (res.token) {
         toast.success("Login successful");
         setTimeout(() => {
-          navigate("/");
+          navigate("/Dashboard");
         }, 2000);
       } else {
         toast.error("Something went wrong during login");
