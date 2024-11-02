@@ -115,4 +115,101 @@
     text-align: center;
     padding: 20px 0;
   }
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
   
+  .modalContent {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .modalTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .modalInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .modalActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .cancelButton {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #CF3636;
+    
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #CF3636;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .addButton {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #17A2B8;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .okButton{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #17A2B8;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .addButton:hover {
+    background-color: #13879c;
+  }
+  
+  .cancelButton:hover {
+    background-color: #d3d3d3;
+  }
+
+  .addTaskTitle {
+    font-size: 17px;
+    font-weight: 400;
+    text-align: left;
+    /* margin-bottom: 15px; */
+  }
+  .priority {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
