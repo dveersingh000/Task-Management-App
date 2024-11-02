@@ -1,0 +1,47 @@
+.analyticsContainer {
+    /* padding: 20px; */
+    background-color: #ffffff;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: 40px;
+  }
+  
+  .taskContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .taskList {
+    background-color: #F9FCFF;
+    padding: 20px;
+    border-radius: 8px;
+    width: 45%;
+  }
+  
+  .taskItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .dot {
+    height: 8px;
+    width: 8px;
+    background-color: #90C4CC;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0;
+  }
+  
+  .count {
+    font-weight: 600;
+  }
+  
